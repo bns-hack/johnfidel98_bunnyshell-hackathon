@@ -1,5 +1,7 @@
 FROM nginx:1.15.12-alpine
 
+ARG WP_HOST
+
 RUN echo -e '''\
 server {\n\
     listen 80;\n\
@@ -15,7 +17,7 @@ server {\n\
     location ~ \\.php$ {\n\
         try_files $uri =404;\n\
         fastcgi_split_path_info ^(.+\\.php)(/.+)$;\n\
-        fastcgi_pass wp:9000;\n\
+        fastcgi_pass WPHOST:9000;\n\
         fastcgi_index index.php;\n\
         include fastcgi_params;\n\
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;\n\
@@ -23,4 +25,6 @@ server {\n\
     }\n\
 }\n\
 ''' > /etc/nginx/conf.d/default.conf;
+
+RUN sed -i s/WPHOST/${WP_HOST}/g /etc/nginx/conf.d/default.conf
 

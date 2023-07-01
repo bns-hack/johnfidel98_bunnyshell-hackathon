@@ -37,6 +37,8 @@ services:
       - wp
     build: 
       dockerfile: Dockerfile
+      args:
+        - WP_HOST=wp
     container_name: proxy-nginx
     restart: unless-stopped
     volumes:
