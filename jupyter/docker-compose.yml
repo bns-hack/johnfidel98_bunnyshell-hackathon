@@ -1,9 +1,15 @@
 version: "3"
 
 services:
-  jupyter:
+  app:
     image: jupyter/minimal-notebook
+    restart: unless-stopped
     volumes:
-      - .:/home/jovyan/work
+      - notebook:/home/jovyan/work
     ports:
-      - 8888:8888
+      - 80:8888
+    environment:
+      - JUPYTER_TOKEN=ThisIsSecret
+
+volumes:
+  notebook:
