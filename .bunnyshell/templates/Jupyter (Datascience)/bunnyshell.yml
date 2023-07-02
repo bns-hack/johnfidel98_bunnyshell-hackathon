@@ -2,7 +2,7 @@ kind: Environment
 name: datascience
 type: primary
 environmentVariables:
-    PASSWORD: '<<BNS_SECRET>>'
+    PASSWORD: 'bns_secret(letmein)'
 components:
     -
         kind: Service

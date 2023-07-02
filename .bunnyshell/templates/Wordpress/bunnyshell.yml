@@ -2,8 +2,8 @@ kind: Environment
 name: generic
 type: primary
 environmentVariables:
-    DB_PASS: '<<BNS_SECRET>>'
-    DB_ROOT_PASS: '<<BNS_SECRET>>'
+    DB_PASS: 'bns_secret(need-to-change)'
+    DB_ROOT_PASS: 'bns_secret(n33d-to-ch4ng3)'
     DB_USER: wp
 components:
     -
