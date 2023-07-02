@@ -1,5 +1,5 @@
 name: Jupyter - Python + R + Julia
-description: This is a boilerplate for creating a new jupyter environment that icludes Python, R and Julia.
+description: This is a boilerplate for creating a new jupyter environment that includes Python, R and Julia.
 tags: [ jupyter ]
 icons: [ jupyter ]
 stack:
