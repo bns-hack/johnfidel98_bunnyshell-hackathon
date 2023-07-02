@@ -6,7 +6,7 @@ services:
     container_name: jupyter
     restart: unless-stopped
     volumes:
-      - notebook:/home/jovyan/work
+      - notebook:/home/jovyan
     ports:
       - 80:8888
     environment:
