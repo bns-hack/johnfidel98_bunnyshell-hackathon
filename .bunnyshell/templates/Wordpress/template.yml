@@ -1,5 +1,5 @@
 name: Wordpress - MySQL + PHP + NGINX
-description: This is a boilerplate for creating a new environment using MySQL, PHP and NGINX.
+description: This is a boilerplate for creating a new wordpress environment using MySQL, PHP and NGINX.
 tags: [ nginx, mysql, php ]
 icons: [ nginx, mysql, php ]
 stack:
