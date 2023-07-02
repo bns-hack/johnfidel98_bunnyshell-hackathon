@@ -1,0 +1,80 @@
+kind: Environment
+name: generic
+type: primary
+environmentVariables:
+    DB_PASS: '<<BNS_SECRET>>'
+    DB_ROOT_PASS: '<<BNS_SECRET>>'
+    DB_USER: wp
+components:
+    -
+        kind: Database
+        name: database
+        dockerCompose:
+            command:
+                - '--default-authentication-plugin=mysql_native_password'
+            environment:
+                MYSQL_DATABASE: wordpress
+                MYSQL_PASSWORD: '{{ env.vars.DB_PASS }}'
+                MYSQL_ROOT_PASSWORD: '{{ env.vars.DB_ROOT_PASS }}'
+                MYSQL_USER: '{{ env.vars.DB_USER }}'
+            image: 'mysql:5.7'
+            restart: unless-stopped
+            ports:
+                - '3306:3306'
+        volumes:
+            -
+                name: dbdata
+                mount: /var/lib/mysql
+                subPath: ''
+    -
+        kind: Application
+        name: proxy
+        gitRepo: 'https://github.com/johnfidel98/bunnyshell-hackathon.git'
+        gitBranch: main
+        gitApplicationPath: wordpress
+        dockerCompose:
+            build:
+                context: ./wordpress
+                dockerfile: Dockerfile
+                args:
+                    - WP_HOST=app
+            ports:
+                - '80:80'
+            restart: unless-stopped
+        hosts:
+            -
+                hostname: 'wordpress-{{ env.base_domain }}'
+                path: /
+                servicePort: 80
+        volumes:
+            -
+                name: wpdata
+                mount: /var/www/html
+                subPath: ''
+    -
+        kind: Service
+        name: app
+        dockerCompose:
+            environment:
+                WORDPRESS_DB_HOST: database
+                WORDPRESS_DB_NAME: wordpress
+                WORDPRESS_DB_PASSWORD: '{{ env.vars.DB_PASS }}'
+                WORDPRESS_DB_USER: '{{ env.vars.DB_USER }}'
+            image: 'wordpress:php8.2-fpm-alpine'
+            restart: unless-stopped
+            ports:
+                - '9000:9000'
+        volumes:
+            -
+                name: wpdata
+                mount: /var/www/html
+                subPath: ''
+volumes:
+    -
+        name: dbdata
+        size: 1Gi
+        type: disk
+    -
+        name: wpdata
+        size: 1Gi
+        type: network

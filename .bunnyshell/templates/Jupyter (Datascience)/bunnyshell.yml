@@ -1,0 +1,31 @@
+kind: Environment
+name: datascience
+type: primary
+environmentVariables:
+    PASSWORD: '<<BNS_SECRET>>'
+components:
+    -
+        kind: Service
+        name: app
+        dockerCompose:
+            environment:
+                JUPYTER_TOKEN: '{{env.vars.PASSWORD}}'
+            image: 'jupyter/datascience-notebook:2023-06-29'
+            ports:
+                - '80:8888'
+            restart: unless-stopped
+        hosts:
+            -
+                hostname: 'jupyter-{{ env.base_domain }}'
+                path: /
+                servicePort: 80
+        volumes:
+            -
+                name: notebook
+                mount: /home/jovyan
+                subPath: ''
+volumes:
+    -
+        name: notebook
+        size: 2Gi
+        type: disk
