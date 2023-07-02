@@ -6,8 +6,8 @@ stack:
   packages:
     - name: NGINX
       version: '1.15.12'
-    - name: Wordpress
-      version: '6.2.2'
+    - name: PHP
+      version: '8.2'
     - name: MySQL
       version: '5.7'
 discoverable: true
