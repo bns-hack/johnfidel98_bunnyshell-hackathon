@@ -1,0 +1,13 @@
+name: Python + R + Julia
+description: This is a boilerplate for creating a new jupyter environment using Python, R and Julia.
+tags: [ python, r, julia ]
+icons: [ python, r, julia ]
+stack:
+  packages:
+    - name: Python
+      version: '3.11.4'
+    - name: R
+      version: '3.11.4'
+    - name: Julia
+      version: '3.11.4'
+discoverable: true
