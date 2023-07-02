@@ -1,13 +1,11 @@
-name: MySQL + Wordpress + NGINX + PHP
-description: This is a boilerplate for creating a new environment using MySQL, Express, Wordpress, PHP and NGINX.
-tags: [ nginx, wordpress, mysql, php ]
-icons: [ nginx, wordpress, mysql, php ]
+name: Wordpress - MySQL + PHP + NGINX
+description: This is a boilerplate for creating a new environment using MySQL, PHP and NGINX.
+tags: [ nginx, mysql, php ]
+icons: [ nginx, mysql, php ]
 stack:
   packages:
     - name: NGINX
       version: '1.15.12'
-    - name: PHP
-      version: '8.2'
     - name: Wordpress
       version: '6.2.2'
     - name: MySQL
